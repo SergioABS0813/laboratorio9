@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JSP - Hello World</title>
+        <title>Inicio de Sesión</title>
         <jsp:include page="./includes/headCss.jsp"/>
 
         <style>
@@ -83,11 +83,11 @@
                 display: block !important;
             }
 
-            body{
-                background-image: url("../images/login.jpg");
+            body {
+                background-image: url('<%=request.getContextPath()%>/resources/images/login.jpg');
+                background-size: 110% 110%;
+                background-position: center;
                 background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: 100% 100%;
             }
 
         </style>
@@ -98,29 +98,19 @@
     </head>
     <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
-
-
-
-
         <main class="form-signin w-100 m-auto">
             <form>
-                <h1 class="h3 mb-3 fw-normal">Ingreso de Sesión</h1>
+                <h1 class="h3 mb-3 fw-normal mb-3" style="color: #48ffff; margin-left: 35px;">Ingreso de Sesión</h1>
 
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control mb-3" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
 
-                <div class="form-check text-start my-3">
-                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Crear una cuenta
-                    </label>
-                </div>
                 <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
             </form>
         </main>
