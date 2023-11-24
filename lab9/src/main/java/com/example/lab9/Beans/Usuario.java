@@ -3,12 +3,21 @@ package com.example.lab9.Beans;
 public class Usuario {
     private int idUsuario;
     private String nombre;
+    private String correo;
     private String password;
     private int idRol;
     private String ultimoIngreso; //
     private int cantidadIngresos;
     private String fechaRegistro; //
     private String fechaEdicion; //
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public int getIdUsuario() {
         return idUsuario;

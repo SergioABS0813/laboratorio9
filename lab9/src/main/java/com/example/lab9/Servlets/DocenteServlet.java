@@ -1,7 +1,6 @@
 package com.example.lab9.Servlets;
 
-import com.example.lab9.Daos.DecanoDao;
-import com.example.lab9.Daos.DocenteDao;
+import com.example.lab9.Daos.UsuarioDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -14,16 +13,21 @@ public class DocenteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view;
 
-        DocenteDao docenteDao = new DocenteDao();
+        UsuarioDao usuarioDao = new UsuarioDao();
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
         switch (action){
             case "lista":
-                request.setAttribute("listaEvaluaciones", docenteDao.listaEvaluaciones());
+                request.setAttribute("listaEvaluaciones", usuarioDao.listaEvaluaciones());
                 view = request.getRequestDispatcher("Docente/listaEvaluaciones.jsp");
                 view.forward(request, response);
                 break;
+            case "registroEvaluaciones":
+                view = request.getRequestDispatcher("Docente/EvaluacionNew.jsp");
+                view.forward(request, response);
+                break;
+
         }
 
     }

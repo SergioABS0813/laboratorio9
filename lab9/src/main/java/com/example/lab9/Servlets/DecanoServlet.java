@@ -1,6 +1,6 @@
 package com.example.lab9.Servlets;
 
-import com.example.lab9.Daos.DecanoDao;
+import com.example.lab9.Daos.UsuarioDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -13,19 +13,21 @@ public class DecanoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view;
 
-        DecanoDao decanoDao = new DecanoDao();
+        UsuarioDao usuarioDao = new UsuarioDao();
 
         // recibimos el parámetro
         String action = request.getParameter("action") == null ? "listaCursos" : request.getParameter("action");
 
         switch (action){
             case "listaCursos":
-                request.setAttribute("listaCursos", decanoDao.listaCursos());
+                request.setAttribute("listaCursos", usuarioDao.listaCursos());
                 view = request.getRequestDispatcher("Decano/listaCursosFacultad.jsp");
                 view.forward(request, response);
                 break;
             case "registroCurso":
-
+                request.setAttribute("listaDocentes", usuarioDao.listaDocentesDisponibles());
+                view = request.getRequestDispatcher("Decano/CursoNew.jsp");
+                view.forward(request, response);
                 break;
 
         }
