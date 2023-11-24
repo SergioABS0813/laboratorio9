@@ -64,6 +64,20 @@ public class DecanoServlet extends HttpServlet {
                 view = request.getRequestDispatcher("Decano/EditDocente.jsp");
                 view.forward(request, response);
                 break;
+            case "delDoc":
+                if (request.getParameter("idDoc") != null) {
+                    String docIdStr = request.getParameter("idDoc");
+                    int docIdInt = 0;
+                    try {
+                        docIdInt = Integer.parseInt(docIdStr);
+                    } catch (NumberFormatException ex) {
+                        response.sendRedirect("DecanoServlet?action=listaDocentes");
+                    }
+
+                    usuarioDao.borrarDocente(docIdInt);
+                }
+                response.sendRedirect("DecanoServlet?action=listaDocentes");
+                break;
 
 
         }

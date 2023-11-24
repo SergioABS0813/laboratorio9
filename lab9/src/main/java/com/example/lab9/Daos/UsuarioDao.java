@@ -117,6 +117,7 @@ public class UsuarioDao extends DaoBase{
 
     public int proximoIdUsuario() {
         int proximoid = 0;
+        int idIni = 0;
 
         String sql = "SELECT * FROM lab_9.usuario;";
 
@@ -125,7 +126,12 @@ public class UsuarioDao extends DaoBase{
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                proximoid++;
+                if(rs.getInt(1) == idIni + 1){
+                    proximoid++;
+                }else{
+                    break;
+                }
+                idIni++;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -179,10 +185,12 @@ public class UsuarioDao extends DaoBase{
                 docentedisponible.setIdUsuario(rs.getInt(1));
                 docentedisponible.setNombre(rs.getString(2));
                 docentedisponible.setCorreo(rs.getString(3));
+                docentedisponible.setUltimoIngreso(rs.getString(6));
+                docentedisponible.setCantidadIngresos(rs.getInt(7));
                 docentedisponible.setFechaRegistro(rs.getString(8));
-
+                docentedisponible.setFechaEdicion(rs.getString(9));
                 Curso curso = new Curso();
-                curso.setIdCurso(rs.getInt(10));
+                curso.setIdCurso(rs.getInt(10)); // Si es null, luego se convertirá en cero, nos sirve para verificar si está o no asignado a un curso
 
                 docentedisponible.setCurso(curso);
 
@@ -194,6 +202,21 @@ public class UsuarioDao extends DaoBase{
 
         return listaDocentes;
     }
+
+    public void borrarDocente(int docenteId) {
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM usuario WHERE idusuario = ?")) {
+
+            pstmt.setInt(1, docenteId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 
 
 
