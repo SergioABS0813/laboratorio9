@@ -44,9 +44,21 @@ public class DecanoServlet extends HttpServlet {
                 view = request.getRequestDispatcher("Decano/EditCurso.jsp");
                 view.forward(request, response);
                 break;
-            case "delCurso":
+            case "delCurso": // Funciona pero no cuando hay un docente designado
 
-                    break;
+                if (request.getParameter("idCurso") != null) {
+                    String cursoId = request.getParameter("idCurso");
+                    int cursoIdint = 0;
+                    try {
+                        cursoIdint = Integer.parseInt(cursoId);
+                    } catch (NumberFormatException ex) {
+                        response.sendRedirect("DecanoServlet?action=listaDocentes");
+                    }
+
+                    cursoDao.borrarCurso(cursoIdint);
+                }
+                response.sendRedirect("DecanoServlet?action=listaCursos");
+                break;
             case "listaDocentes":
                 ArrayList<Usuario> listaDocentesTotal = usuarioDao.listaDocentesSinCurso();
                 request.setAttribute("listatotaldoc", listaDocentesTotal);
@@ -93,6 +105,43 @@ public class DecanoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String action = request.getParameter("action") == null ? "listaCursos" : request.getParameter("action");
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+        CursoDao cursoDao = new CursoDao();
+
+        switch (action){
+            case "registroCurso": //Crea en ambas tablas de la db
+                String idCurso = request.getParameter("idCurso");
+                String codigoCurso =request.getParameter("codigoCurso");
+                String nombreCurso =request.getParameter("nombreCurso");
+                String facultadDecanoId =request.getParameter("facultadDecanoId");
+                String nameDocenteCurso =request.getParameter("docenteCurso");
+                Usuario docente = usuarioDao.obtenerUsuarioxNombre(nameDocenteCurso); //revisarrrrr
+                String fechaRegistro =request.getParameter("fechaRegistro");
+                String fechaEdicion =request.getParameter("fechaEdicion");
+
+                Curso curso = new Curso();
+                curso.setIdCurso(Integer.parseInt(idCurso));
+                curso.setCodigoCurso(codigoCurso);
+                curso.setNombreCurso(nombreCurso);
+                curso.setIdFacultad(Integer.parseInt(facultadDecanoId));
+                curso.setDocente(docente);
+                curso.setFechaRegistro(fechaRegistro);
+                curso.setFechaEdicion(fechaEdicion);
+                cursoDao.registroCurso(curso);
+
+                response.sendRedirect("DecanoServlet");
+
+                break;
+        }
+
+
+
+
+
+
 
     }
 }

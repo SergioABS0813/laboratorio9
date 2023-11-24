@@ -88,6 +88,47 @@ public class CursoDao extends DaoBase{
         return listaCursoyEvaluaciones;
     }
 
+    public void borrarCurso(int cursoId) {
+        String sql = "delete FROM lab_9.curso_has_docente where idcurso = ?;\n" +
+                "delete from lab_9.curso where idcurso = ?;";
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, cursoId);
+            pstmt.setInt(2, cursoId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    public void registroCurso(Curso curso){
+
+        String sql = "INSERT INTO curso (idcurso, codigo, nombre, idfacultad, fecha_registro, fecha_edicion ) VALUES (?, ?, ?, ?, ?, ?);\n" +
+                "insert into curso_has_docente (idcurso, iddocente) values (?,?);"; //REVISAR SQL
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,curso.getIdCurso());
+            pstmt.setString(2,curso.getCodigoCurso());
+            pstmt.setString(3, curso.getNombreCurso());
+            pstmt.setInt(4, curso.getIdFacultad());
+            pstmt.setString(5, curso.getFechaRegistro());
+            pstmt.setString(6, curso.getFechaEdicion());
+            pstmt.setInt(7,curso.getIdCurso());
+            pstmt.setInt(8, curso.getDocente().getIdUsuario());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 
 }

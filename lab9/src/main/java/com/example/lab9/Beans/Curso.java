@@ -9,6 +9,15 @@ public class Curso {
     private String fechaRegistro; //
     private String fechaEdicion; //
     private Evaluaciones evaluaciones; // Como atributo
+    private Usuario docente;
+
+    public Usuario getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Usuario docente) {
+        this.docente = docente;
+    }
 
     public Evaluaciones getEvaluaciones() {
         return evaluaciones;

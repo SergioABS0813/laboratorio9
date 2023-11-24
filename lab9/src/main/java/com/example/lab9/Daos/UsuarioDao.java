@@ -216,6 +216,38 @@ public class UsuarioDao extends DaoBase{
         }
     }
 
+    public Usuario obtenerUsuarioxNombre(String nombre) {
+
+        String sql = "SELECT * FROM lab_9.usuario where nombre = ?;";
+
+        Usuario usuario = new Usuario();
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombre);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    usuario.setIdUsuario(rs.getInt(1));
+                    usuario.setNombre(rs.getString(2));
+                    usuario.setCorreo(rs.getString(3));
+                    usuario.setUltimoIngreso(rs.getString(6));
+                    usuario.setCantidadIngresos(rs.getInt(7));
+                    usuario.setFechaEdicion(rs.getString(9));
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return usuario;
+    }
+
+
+
 
 
 

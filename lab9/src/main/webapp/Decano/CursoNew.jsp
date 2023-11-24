@@ -28,36 +28,45 @@
     <body>
         <div class='container'>
             <div class="row justify-content-center">
-                <form method="POST" action="DepartmentServlet?action=guardar" class="col-md-6 col-lg-6">
+                <form method="POST" action="DecanoServlet?action=registroCurso" class="col-md-6 col-lg-6">
 
                     <h1 class='mt-5' style="margin-left: 110px;"><strong>Registro de Curso</strong></h1>
                     <hr>
 
                     <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name = "department_id" value="<%=proxIdCurso%>">
+                        <input type="hidden" class="form-control form-control-sm" name = "idCurso" value="<%=proxIdCurso%>">
                     </div>
                     <div class="mb-3">
-                        <label for="department_id">Código del Curso</label>
-                        <input type="text" class="form-control form-control-sm" name = "department_id">
+                        <label for="codigoCurso">Código del Curso</label>
+                        <input type="text" class="form-control form-control-sm" name = "codigoCurso">
                     </div>
                     <div class="mb-3">
-                        <label for="department_name">Nombre del Curso</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="department_name">Facultad de Decano</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                        <label for="nombreCurso">Nombre del Curso</label>
+                        <input type="text" class="form-control form-control-sm" name="nombreCurso" >
                     </div>
 
                     <div class="mb-3">
-                        <label for="manager_id">Dep Manager</label>
-                        <select name="manager_id" class="form-select" >
-                            <option value="SIN-PROFESOR">----Designar Profesor----</option>
+                        <label for="facultadDecanoId">Facultad de Decano (S)</label>
+                        <input type="text" class="form-control form-control-sm" name="facultadDecanoId" >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="docenteCurso">Docente del Curso</label>
+                        <select name="docenteCurso" class="form-select" >
+                            <option value="SIN-PROFESOR">----Designar Docente----</option>
                             <% for(Usuario docenteDisponible: listaDocentes){ %>
                             <option value="<%=docenteDisponible.getIdUsuario()%>"> <%=docenteDisponible.getNombre()%> </option>
                             <% } %>
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fechaRegistro">Fecha de Registro (S)</label>
+                        <input type="text" class="form-control form-control-sm" name="fechaRegistro" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="fechaEdicion">Fecha de Edición (S)</label>
+                        <input type="text" class="form-control form-control-sm" name="fechaEdicion" >
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DecanoServlet" class="btn btn-danger">Cancelar</a>
