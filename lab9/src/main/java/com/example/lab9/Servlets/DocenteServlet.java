@@ -43,6 +43,12 @@ public class DocenteServlet extends HttpServlet {
                 view = request.getRequestDispatcher("Docente/EditEvaluacion.jsp");
                 view.forward(request, response);
                 break;
+            case "delEvaluacion":
+                String idEvaDel = request.getParameter("idEva");
+                int idEvaDelint = Integer.parseInt(idEvaDel);
+                evaluacionesDao.borrarEvaluacion(idEvaDelint);
+                response.sendRedirect("DocenteServlet?action=lista");
+                break;
 
         }
 

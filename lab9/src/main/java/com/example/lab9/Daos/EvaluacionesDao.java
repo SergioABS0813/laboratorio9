@@ -58,5 +58,18 @@ public class EvaluacionesDao extends DaoBase{
         return proximoid;
     }
 
+    public void borrarEvaluacion(int evaId) {
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM evaluaciones WHERE idevaluaciones = ?")) {
+
+            pstmt.setInt(1, evaId);
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }

@@ -20,7 +20,7 @@
         <style>
             body {
                 background-image: url('<%=request.getContextPath()%>/resources/images/white-cubes.jpg');
-                background-size: 150% 155%;
+                background-size: 300% 450%;
                 background-position: center;
                 background-repeat: no-repeat;
             }
@@ -76,7 +76,7 @@
                     <%if (evaluaciones.getSemestre().getHabilitado() == 1){ %>
                     <td>
                         <a onclick="return confirm('¿Está seguro de borrar?')" class="btn btn-danger"
-                           href="#">
+                           href="<%=request.getContextPath()%>/DocenteServlet?action=delEvaluacion&idEva=<%=evaluaciones.getIdEvaluaciones()%>">
                             <i class="bi bi-trash3"></i>
                         </a>
                     </td>
