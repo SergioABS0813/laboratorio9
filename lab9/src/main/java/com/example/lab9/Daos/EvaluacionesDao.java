@@ -3,10 +3,7 @@ package com.example.lab9.Daos;
 import com.example.lab9.Beans.Curso;
 import com.example.lab9.Beans.Evaluaciones;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class EvaluacionesDao extends DaoBase{
 
@@ -41,4 +38,25 @@ public class EvaluacionesDao extends DaoBase{
 
         return evaluaciones;
     }
+
+    public int proximoIdEvaluacion() {
+        int proximoid = 0;
+
+        String sql = "SELECT * FROM lab_9.evaluaciones;";
+
+        try (Connection conn = this.getConection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                proximoid++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return proximoid;
+    }
+
+
 }

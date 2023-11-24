@@ -9,6 +9,7 @@
 <%@ page import="com.example.lab9.Beans.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <jsp:useBean scope="request" id="listaDocentes" type="java.util.ArrayList<com.example.lab9.Beans.Usuario>"/>
+<jsp:useBean id="proxIdCurso" scope="request" type="java.lang.Integer"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,8 +34,7 @@
                     <hr>
 
                     <div class="mb-3">
-                        <label for="department_id">ID del Curso</label>
-                        <input type="text" class="form-control form-control-sm" name = "department_id">
+                        <input type="hidden" class="form-control form-control-sm" name = "department_id" value="<%=proxIdCurso%>">
                     </div>
                     <div class="mb-3">
                         <label for="department_id">Código del Curso</label>

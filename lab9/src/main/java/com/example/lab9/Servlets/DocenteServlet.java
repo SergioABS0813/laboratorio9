@@ -28,6 +28,8 @@ public class DocenteServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "registroEvaluaciones":
+                int proximoIdEvaluacion = evaluacionesDao.proximoIdEvaluacion() + 1;
+                request.setAttribute("proxIdEva", Integer.valueOf(proximoIdEvaluacion));
                 view = request.getRequestDispatcher("Docente/EvaluacionNew.jsp");
                 view.forward(request, response);
                 break;

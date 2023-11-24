@@ -115,5 +115,57 @@ public class UsuarioDao extends DaoBase{
         return listaDocentes;
     }
 
+    public int proximoIdUsuario() {
+        int proximoid = 0;
+
+        String sql = "SELECT * FROM lab_9.usuario;";
+
+        try (Connection conn = this.getConection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                proximoid++;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return proximoid;
+    }
+
+    public Usuario obtenerUsuarioxId(int userId) {
+
+        String sql = "SELECT * FROM lab_9.usuario where idusuario = ?;";
+
+        Usuario usuario = new Usuario();
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    usuario.setIdUsuario(rs.getInt(1));
+                    usuario.setNombre(rs.getString(2));
+                    usuario.setCorreo(rs.getString(3));
+                    usuario.setUltimoIngreso(rs.getString(6));
+                    usuario.setCantidadIngresos(rs.getInt(7));
+                    usuario.setFechaEdicion(rs.getString(9));
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return usuario;
+    }
+
+
+
+
 
 }

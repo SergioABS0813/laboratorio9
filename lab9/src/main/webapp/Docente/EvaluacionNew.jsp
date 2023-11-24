@@ -8,6 +8,7 @@
 <%@page import="java.util.ArrayList" %>
 <%@ page import="com.example.lab9.Beans.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<jsp:useBean id="proxIdEva" type="java.lang.Integer" scope="request"/>
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,9 @@
 
                     <h1 class='mt-5' style="margin-left: 110px;"><strong>Registro de Evaluación</strong></h1>
                     <hr>
+                    <div class="mb-3">
+                        <input type="hidden" class="form-control form-control-sm" name = "department_id" value="<%=proxIdEva%>">
+                    </div>
                     <div class="mb-3">
                         <label for="department_id">Nombre de Alumno</label>
                         <input type="text" class="form-control form-control-sm" name = "department_id">

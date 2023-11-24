@@ -30,6 +30,8 @@ public class DecanoServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "registroCurso": //Create
+                int proximoIdCurso = cursoDao.proximoIdCurso() + 1;
+                request.setAttribute("proxIdCurso", Integer.valueOf(proximoIdCurso));
                 request.setAttribute("listaDocentes", usuarioDao.listaDocentesDisponibles());
                 view = request.getRequestDispatcher("Decano/CursoNew.jsp");
                 view.forward(request, response);
@@ -49,13 +51,18 @@ public class DecanoServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "registroDocente":
+                int proximoId = usuarioDao.proximoIdUsuario() + 1;
+                request.setAttribute("proxId", Integer.valueOf(proximoId));
                 view = request.getRequestDispatcher("Decano/DocenteNew.jsp");
                 view.forward(request, response);
                 break;
             case "editDocente":
                 String idDoc = request.getParameter("idDocente");
                 int idDocInt = Integer.parseInt(idDoc);
-
+                Usuario docente = usuarioDao.obtenerUsuarioxId(idDocInt);
+                request.setAttribute("docente", docente);
+                view = request.getRequestDispatcher("Decano/EditDocente.jsp");
+                view.forward(request, response);
                 break;
 
 
