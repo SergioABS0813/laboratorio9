@@ -89,7 +89,7 @@ public class UsuarioDao extends DaoBase{
     }
 
 
-    public ArrayList<Usuario> listaDocentesDisponibles() { //Combobox
+    public ArrayList<Usuario> listaDocentesDisponibles() { //Combobox y borrados
         ArrayList<Usuario> listaDocentes = new ArrayList<>();
 
         String sql = "SELECT * FROM lab_9.usuario u\n" +
@@ -163,6 +163,39 @@ public class UsuarioDao extends DaoBase{
 
         return usuario;
     }
+
+
+    public ArrayList<Usuario> listaDocentesSinCurso() { // borrados
+        ArrayList<Usuario> listaDocentes = new ArrayList<>();
+
+        String sql = "SELECT * FROM lab_9.usuario u left join curso_has_docente c on u.idusuario = c.iddocente where u.idrol = 4;";
+
+        try (Connection conn = this.getConection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Usuario docentedisponible = new Usuario();
+                docentedisponible.setIdUsuario(rs.getInt(1));
+                docentedisponible.setNombre(rs.getString(2));
+                docentedisponible.setCorreo(rs.getString(3));
+                docentedisponible.setFechaRegistro(rs.getString(8));
+
+                Curso curso = new Curso();
+                curso.setIdCurso(rs.getInt(10));
+
+                docentedisponible.setCurso(curso);
+
+                listaDocentes.add(docentedisponible);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaDocentes;
+    }
+
+
 
 
 

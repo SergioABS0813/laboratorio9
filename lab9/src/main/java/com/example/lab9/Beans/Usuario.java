@@ -10,6 +10,15 @@ public class Usuario {
     private int cantidadIngresos;
     private String fechaRegistro; //
     private String fechaEdicion; //
+    private Curso curso; // Bean como atributo
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
     public String getCorreo() {
         return correo;

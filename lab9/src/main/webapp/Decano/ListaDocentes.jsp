@@ -75,12 +75,14 @@
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
+                    <% if (docente.getCurso().getIdCurso() ) %>
                     <td>
                         <a onclick="return confirm('¿Está seguro de borrar?')" class="btn btn-danger"
                            href="#">
                             <i class="bi bi-trash3"></i>
                         </a>
                     </td>
+
                 </tr>
                 <%
                     }
