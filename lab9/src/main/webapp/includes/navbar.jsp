@@ -14,13 +14,13 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link"
-                       href="#">
+                       href="<%=request.getContextPath()%>/DecanoServlet">
                         Cursos
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
-                       href="#">
+                       href="<%=request.getContextPath()%>/DecanoServlet?action=listaDocentes">
                         Docentes
                     </a>
                 </li>

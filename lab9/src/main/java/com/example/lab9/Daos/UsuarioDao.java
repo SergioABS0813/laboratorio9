@@ -60,6 +60,34 @@ public class UsuarioDao extends DaoBase{
         return listaCursos;
     }
 
+    public ArrayList<Usuario> listaDocentesTotal() { //vista decano
+        ArrayList<Usuario> listaDocentes = new ArrayList<>();
+
+        String sql = "SELECT * FROM lab_9.usuario where idrol = 4;";
+
+        try (Connection conn = this.getConection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Usuario docente = new Usuario();
+                docente.setIdUsuario(rs.getInt(1));
+                docente.setNombre(rs.getString(2));
+                docente.setCorreo(rs.getString(3));
+                docente.setUltimoIngreso(rs.getString(6));
+                docente.setCantidadIngresos(rs.getInt(7));
+                docente.setFechaRegistro(rs.getString(8));
+                docente.setFechaEdicion(rs.getString(9));
+
+                listaDocentes.add(docente);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaDocentes;
+    }
+
 
     public ArrayList<Usuario> listaDocentesDisponibles() { //Combobox
         ArrayList<Usuario> listaDocentes = new ArrayList<>();
