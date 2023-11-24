@@ -8,6 +8,15 @@ public class Curso {
     private String nombreCurso;
     private String fechaRegistro; //
     private String fechaEdicion; //
+    private Evaluaciones evaluaciones; // Como atributo
+
+    public Evaluaciones getEvaluaciones() {
+        return evaluaciones;
+    }
+
+    public void setEvaluaciones(Evaluaciones evaluaciones) {
+        this.evaluaciones = evaluaciones;
+    }
 
     public String getNombreCurso() {
         return nombreCurso;
