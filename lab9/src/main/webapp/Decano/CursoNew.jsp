@@ -31,6 +31,11 @@
 
                     <h1 class='mt-5' style="margin-left: 110px;"><strong>Registro de Curso</strong></h1>
                     <hr>
+
+                    <div class="mb-3">
+                        <label for="department_id">ID del Curso</label>
+                        <input type="text" class="form-control form-control-sm" name = "department_id">
+                    </div>
                     <div class="mb-3">
                         <label for="department_id">Código del Curso</label>
                         <input type="text" class="form-control form-control-sm" name = "department_id">

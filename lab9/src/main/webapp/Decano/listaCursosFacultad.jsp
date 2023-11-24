@@ -65,7 +65,7 @@
                     </td>
                     <td>
                         <a class="btn btn-primary"
-                           href="#">
+                           href="<%=request.getContextPath()%>/DecanoServlet?action=editCurso&idCurso=<%=curso.getIdCurso()%>">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>

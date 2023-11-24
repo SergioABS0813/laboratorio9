@@ -68,7 +68,7 @@
                     </td>
                     <td>
                         <a class="btn btn-primary"
-                           href="#">
+                           href="<%=request.getContextPath()%>/DocenteServlet?action=editEva&idEva=<%=evaluaciones.getIdEvaluaciones()%>">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
