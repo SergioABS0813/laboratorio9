@@ -6,8 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.example.lab9.Beans.Curso" %>
-<jsp:useBean type="java.util.ArrayList<com.example.lab9.Beans.Curso>" scope="request" id="listaCursos"/>
+<%@ page import="com.example.lab9.Dto.CursoDto" %>
+<jsp:useBean type="java.util.ArrayList<com.example.lab9.Dto.CursoDto>" scope="request" id="listaCursos"/>
 
 <!DOCTYPE html>
 <html>
@@ -50,7 +50,7 @@
                     <th>Borrar</th>
                 </tr>
                 <%
-                    for (Curso curso : listaCursos) {
+                    for (CursoDto curso : listaCursos) {
                 %>
                 <tr>
                     <td><%=curso.getIdCurso()%>
@@ -69,12 +69,16 @@
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
+                    <%if (curso.getCantidadEvaluaciones() == 0){ %>
                     <td>
                         <a onclick="return confirm('¿Está seguro de borrar?')" class="btn btn-danger"
-                           href="#">
+                           href="<%=request.getContextPath()%>/DecanoServlet?action=delCurso&idCurso=<%=curso.getIdCurso()%>">
                             <i class="bi bi-trash3"></i>
                         </a>
                     </td>
+                    <%}else{
+
+                    }%>
                 </tr>
                 <%
                     }

@@ -25,7 +25,7 @@ public class DecanoServlet extends HttpServlet {
 
         switch (action){
             case "listaCursos":
-                request.setAttribute("listaCursos", usuarioDao.listaCursos());
+                request.setAttribute("listaCursos", cursoDao.listaCursoconEvaluaciones());
                 view = request.getRequestDispatcher("Decano/listaCursosFacultad.jsp");
                 view.forward(request, response);
                 break;
@@ -44,6 +44,9 @@ public class DecanoServlet extends HttpServlet {
                 view = request.getRequestDispatcher("Decano/EditCurso.jsp");
                 view.forward(request, response);
                 break;
+            case "delCurso":
+
+                    break;
             case "listaDocentes":
                 ArrayList<Usuario> listaDocentesTotal = usuarioDao.listaDocentesSinCurso();
                 request.setAttribute("listatotaldoc", listaDocentesTotal);

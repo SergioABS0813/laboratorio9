@@ -3,6 +3,7 @@ package com.example.lab9.Servlets;
 import com.example.lab9.Beans.Curso;
 import com.example.lab9.Beans.Evaluaciones;
 import com.example.lab9.Daos.EvaluacionesDao;
+import com.example.lab9.Daos.SemestreDao;
 import com.example.lab9.Daos.UsuarioDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -18,12 +19,13 @@ public class DocenteServlet extends HttpServlet {
 
         UsuarioDao usuarioDao = new UsuarioDao();
         EvaluacionesDao evaluacionesDao = new EvaluacionesDao();
+        SemestreDao semestreDao = new SemestreDao();
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
         switch (action){
             case "lista":
-                request.setAttribute("listaEvaluaciones", usuarioDao.listaEvaluaciones());
+                request.setAttribute("listaEvaluaciones", semestreDao.listaEvaluacionConSemestre());
                 view = request.getRequestDispatcher("Docente/listaEvaluaciones.jsp");
                 view.forward(request, response);
                 break;

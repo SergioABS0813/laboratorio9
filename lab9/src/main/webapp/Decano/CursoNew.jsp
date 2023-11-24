@@ -46,6 +46,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="department_name">Facultad de Decano</label>
+                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                    </div>
+
+                    <div class="mb-3">
                         <label for="manager_id">Dep Manager</label>
                         <select name="manager_id" class="form-select" >
                             <option value="SIN-PROFESOR">----Designar Profesor----</option>

@@ -45,6 +45,14 @@
           <label for="department_name">Nota del Alumno (0-20)</label>
           <input type="text" class="form-control form-control-sm" name="department_name" value="<%=eva.getNota()%>">
         </div>
+        <div class="mb-3">
+          <label for="department_name">Curso del Docente</label>
+          <input type="text" class="form-control form-control-sm" name="department_name" >
+        </div>
+        <div class="mb-3">
+          <label for="department_name">Semestre Habilitado por ADMIN</label>
+          <input type="text" class="form-control form-control-sm" name="department_name" >
+        </div>
 
         <a href="<%= request.getContextPath()%>/DocenteServlet" class="btn btn-danger mt-2">Cancelar</a>
         <button type="submit" class="btn btn-primary mt-2">Actualizar</button>

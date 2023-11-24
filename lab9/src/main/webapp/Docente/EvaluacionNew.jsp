@@ -51,6 +51,14 @@
                         <label for="department_name">Nota del Alumno (0-20)</label>
                         <input type="text" class="form-control form-control-sm" name="department_name" >
                     </div>
+                    <div class="mb-3">
+                        <label for="department_name">Curso del Docente</label>
+                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="department_name">Semestre Habilitado por ADMIN</label>
+                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                    </div>
 
                     <a href="<%= request.getContextPath()%>/DocenteServlet" class="btn btn-danger">Cancelar</a>
                     <input type="submit" value="Guardar" class="btn btn-primary"/>

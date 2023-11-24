@@ -10,6 +10,15 @@ public class Evaluaciones {
     private int idSemetre;
     private String fechaRegistro; //
     private String fechaEdicion; //
+    private Semestre semestre;
+
+    public Semestre getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
+    }
 
     public int getIdEvaluaciones() {
         return idEvaluaciones;

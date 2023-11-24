@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.lab9.Beans.Evaluaciones" %>
+<%@ page import="com.example.lab9.Beans.Semestre" %>
 <jsp:useBean type="java.util.ArrayList<com.example.lab9.Beans.Evaluaciones>" scope="request" id="listaEvaluaciones"/>
 
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
                     </td>
                     <td><%=evaluaciones.getNota()%>
                     </td>
-                    <td><%=evaluaciones.getIdSemetre()%>
+                    <td><%=evaluaciones.getSemestre().getNombre()%>
                     </td>
                     <td>
                         <a class="btn btn-primary"
@@ -72,12 +73,18 @@
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
+                    <%if (evaluaciones.getSemestre().getHabilitado() == 1){ %>
                     <td>
                         <a onclick="return confirm('¿Está seguro de borrar?')" class="btn btn-danger"
                            href="#">
                             <i class="bi bi-trash3"></i>
                         </a>
                     </td>
+                    <% }else{
+
+                        }
+                        %>
+
                 </tr>
                 <%
                     }
