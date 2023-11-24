@@ -49,6 +49,13 @@ public class DecanoServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "registroDocente":
+                view = request.getRequestDispatcher("Decano/DocenteNew.jsp");
+                view.forward(request, response);
+                break;
+            case "editDocente":
+                String idDoc = request.getParameter("idDocente");
+                int idDocInt = Integer.parseInt(idDoc);
+
                 break;
 
 

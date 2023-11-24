@@ -35,37 +35,43 @@
 
             <hr style="border: 2px solid #000000">
 
-            <h1 class='mb-3' style="margin-left: 380px;"><strong>Lista de los Docentes</strong></h1>
+            <h1 class='mb-3' style="margin-left: 430px;"><strong>Lista de los Docentes</strong></h1>
 
             <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DecanoServlet?action=registroDocente">Registrar Docente</a>
 
             <table class="table">
                 <tr>
-                    <th >ID Curso</th>
-                    <th>Código</th>
+                    <th >ID Docente</th>
                     <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Último Ingreso</th>
+                    <th>Cantidad de Ingresos</th>
                     <th>Fecha Registro</th>
                     <th>Fecha Edición</th>
                     <th>Editar</th>
                     <th>Borrar</th>
                 </tr>
                 <%
-                    for (Curso curso : listaCursos) {
+                    for (Usuario docente : listatotaldoc) {
                 %>
                 <tr>
-                    <td><%=curso.getIdCurso()%>
+                    <td><%=docente.getIdUsuario()%>
                     </td>
-                    <td><%=curso.getCodigoCurso()%>
+                    <td><%=docente.getNombre()%>
                     </td>
-                    <td><%=curso.getNombreCurso()%>
+                    <td><%=docente.getCorreo()%>
                     </td>
-                    <td><%=curso.getFechaRegistro()%>
+                    <td><%=docente.getUltimoIngreso()%>
                     </td>
-                    <td><%=curso.getFechaEdicion()%>
+                    <td><%=docente.getCantidadIngresos()%>
+                    </td>
+                    <td><%=docente.getFechaRegistro()%>
+                    </td>
+                    <td><%=docente.getFechaEdicion()%>
                     </td>
                     <td>
                         <a class="btn btn-primary"
-                           href="<%=request.getContextPath()%>/DecanoServlet?action=editCurso&idCurso=<%=curso.getIdCurso()%>">
+                           href="<%=request.getContextPath()%>/DecanoServlet?action=editDocente&idDocente=<%=docente.getIdUsuario()%>">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
