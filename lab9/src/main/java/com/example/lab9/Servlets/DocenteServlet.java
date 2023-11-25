@@ -10,6 +10,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "DocenteServlet", value = "/DocenteServlet")
 public class DocenteServlet extends HttpServlet {
@@ -22,18 +24,20 @@ public class DocenteServlet extends HttpServlet {
             RequestDispatcher view;
 
             if (usuario.getIdRol() == 4){ //cuando ingresamos a Session solo ingresamos con los atributos NETAMENTE de Usuarios no de relacion con otras tablas
-                
-
+                //Fecha y Hora que ingresa
                 UsuarioDao usuarioDao = new UsuarioDao();
                 EvaluacionesDao evaluacionesDao = new EvaluacionesDao();
                 SemestreDao semestreDao = new SemestreDao();
                 Curso_Has_DocenteDao cursoHasDocenteDao = new Curso_Has_DocenteDao();
                 CursoDao cursoDao =  new CursoDao();
 
+
+
                 String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
                 switch (action){
-                    case "lista":
+                    case "lista"://home de ingreso
+                        usuarioDao.actualizarFechaUltimaSesionDoc(usuario.getIdUsuario());
                         request.setAttribute("listaEvaluaciones", semestreDao.listaEvaluacionConSemestre());
                         Curso curso = cursoHasDocenteDao.buscarCursoxIdDoc(usuario.getIdUsuario()); //solo idCurso
                         Curso curso1 = cursoDao.obtenerCursoxId(curso.getIdCurso());
