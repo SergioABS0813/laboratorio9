@@ -34,7 +34,7 @@
                     <hr>
 
                     <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name = "idCurso" value="<%=proxIdCurso%>">
+                        <input type="text" class="form-control form-control-sm" name = "idCurso" value="<%=proxIdCurso%>">
                     </div>
                     <div class="mb-3">
                         <label for="codigoCurso">Código del Curso</label>
@@ -55,7 +55,7 @@
                         <select name="docenteCurso" class="form-select" >
                             <option value="SIN-PROFESOR">----Designar Docente----</option>
                             <% for(Usuario docenteDisponible: listaDocentes){ %>
-                            <option value="<%=docenteDisponible.getIdUsuario()%>"> <%=docenteDisponible.getNombre()%> </option>
+                            <option value="<%=docenteDisponible.getNombre()%>"> <%=docenteDisponible.getNombre()%> </option>
                             <% } %>
                         </select>
                     </div>

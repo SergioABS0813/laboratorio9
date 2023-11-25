@@ -30,7 +30,7 @@ public class DecanoServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "registroCurso": //Create
-                int proximoIdCurso = cursoDao.proximoIdCurso() + 1;
+                int proximoIdCurso = cursoDao.proximoIdCurso();
                 request.setAttribute("proxIdCurso", Integer.valueOf(proximoIdCurso));
                 request.setAttribute("listaDocentes", usuarioDao.listaDocentesDisponibles());
                 view = request.getRequestDispatcher("Decano/CursoNew.jsp");

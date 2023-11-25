@@ -42,7 +42,8 @@ public class CursoDao extends DaoBase{
     }
 
     public int proximoIdCurso() {
-        int proximoid = 0;
+        int proximoid = 1;
+        int idIni = 0;
 
         String sql = "SELECT * FROM lab_9.curso;";
 
@@ -51,7 +52,14 @@ public class CursoDao extends DaoBase{
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                proximoid++;
+                if(rs.getInt(1) == idIni + 1){
+                    proximoid++;
+                }
+                else{
+                    break;
+                }
+                idIni++;
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -89,15 +97,19 @@ public class CursoDao extends DaoBase{
     }
 
     public void borrarCurso(int cursoId) {
-        String sql = "delete FROM lab_9.curso_has_docente where idcurso = ?;\n" +
-                "delete from lab_9.curso where idcurso = ?;";
+        String sql = "delete FROM lab_9.curso_has_docente where idcurso = ?;"; //Primero borramos la tabla dependiente
 
         try (Connection conn = getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, cursoId);
-            pstmt.setInt(2, cursoId);
             pstmt.executeUpdate();
+
+            String sql1 = "delete from lab_9.curso where idcurso = ?;";
+            try( PreparedStatement pstmt1 = conn.prepareStatement(sql1)){
+                pstmt1.setInt(1, cursoId);
+                pstmt1.executeUpdate();
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -107,8 +119,7 @@ public class CursoDao extends DaoBase{
 
     public void registroCurso(Curso curso){
 
-        String sql = "INSERT INTO curso (idcurso, codigo, nombre, idfacultad, fecha_registro, fecha_edicion ) VALUES (?, ?, ?, ?, ?, ?);\n" +
-                "insert into curso_has_docente (idcurso, iddocente) values (?,?);"; //REVISAR SQL
+        String sql = "INSERT INTO curso (idcurso, codigo, nombre, idfacultad, fecha_registro, fecha_edicion ) VALUES (?, ?, ?, ?, ?, ?);"; //Primero agregamos a la tabla independiente
 
         try (Connection conn = getConection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -119,10 +130,17 @@ public class CursoDao extends DaoBase{
             pstmt.setInt(4, curso.getIdFacultad());
             pstmt.setString(5, curso.getFechaRegistro());
             pstmt.setString(6, curso.getFechaEdicion());
-            pstmt.setInt(7,curso.getIdCurso());
-            pstmt.setInt(8, curso.getDocente().getIdUsuario());
 
             pstmt.executeUpdate();
+
+            String sql1 = "INSERT INTO curso_has_docente (idcurso, iddocente) VALUES (?,?);";
+
+            try(PreparedStatement pstmt1 = conn.prepareStatement(sql1)){
+                pstmt1.setInt(1,curso.getIdCurso());
+                pstmt1.setInt(2,curso.getDocente().getIdUsuario());
+                pstmt1.executeUpdate();
+            }
+
 
         } catch (SQLException ex) {
             ex.printStackTrace();
