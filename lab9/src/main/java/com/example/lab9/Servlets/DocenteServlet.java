@@ -37,7 +37,7 @@ public class DocenteServlet extends HttpServlet {
 
                 switch (action){
                     case "lista"://home de ingreso
-                        usuarioDao.actualizarFechaUltimaSesionDoc(usuario.getIdUsuario());
+                        usuarioDao.actualizarFechaUltimaSesion(usuario.getIdUsuario(), usuario.getCantidadIngresos());
                         request.setAttribute("listaEvaluaciones", semestreDao.listaEvaluacionConSemestre());
                         Curso curso = cursoHasDocenteDao.buscarCursoxIdDoc(usuario.getIdUsuario()); //solo idCurso
                         Curso curso1 = cursoDao.obtenerCursoxId(curso.getIdCurso());

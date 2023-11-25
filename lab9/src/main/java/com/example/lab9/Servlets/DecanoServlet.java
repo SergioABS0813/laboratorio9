@@ -36,6 +36,7 @@ public class DecanoServlet extends HttpServlet {
                     case "listaCursos": //home Decano
 
                         if (usuario != null){
+                            usuarioDao.actualizarFechaUltimaSesion(usuario.getIdUsuario(), usuario.getCantidadIngresos());
                             Usuario usuario1 = facultadHasDecanoDao.buscarFacultadxIdDecano(usuario.getIdUsuario());
                             request.setAttribute("nombreFacu", usuario1.getFacultad().getNombreFacultad());
                             request.setAttribute("listaCursos", cursoDao.listaCursoconEvaluaciones());
