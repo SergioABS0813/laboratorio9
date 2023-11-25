@@ -32,7 +32,7 @@
                     <hr>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control form-control-sm" name = "proxId" value="<%=proxId%>">
+                        <input type="hidden" class="form-control form-control-sm" name = "proxId" value="<%=proxId%>">
                     </div>
                     <div class="mb-3">
                         <label for="department_id">Nombre</label>

@@ -10,6 +10,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <jsp:useBean scope="request" id="listaDocentes" type="java.util.ArrayList<com.example.lab9.Beans.Usuario>"/>
 <jsp:useBean id="proxIdCurso" scope="request" type="java.lang.Integer"/>
+<jsp:useBean id="idFacultad" scope="request" type="java.lang.Integer"/>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,8 +48,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="facultadDecanoId">Facultad de Decano (S)</label>
-                        <input type="text" class="form-control form-control-sm" name="facultadDecanoId" >
+                        <input type="hidden" class="form-control form-control-sm" name="facultadDecanoId" value="<%=idFacultad%>">
                     </div>
 
                     <div class="mb-3">
@@ -61,12 +62,10 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="fechaRegistro">Fecha de Registro (S)</label>
-                        <input type="text" class="form-control form-control-sm" name="fechaRegistro" >
+                        <input type="hidden" class="form-control form-control-sm" name="fechaRegistro" >
                     </div>
                     <div class="mb-3">
-                        <label for="fechaEdicion">Fecha de Edición (S)</label>
-                        <input type="text" class="form-control form-control-sm" name="fechaEdicion" >
+                        <input type="hidden" class="form-control form-control-sm" name="fechaEdicion" >
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DecanoServlet" class="btn btn-danger">Cancelar</a>

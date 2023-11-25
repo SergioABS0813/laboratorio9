@@ -1,6 +1,7 @@
 package com.example.lab9.Servlets;
 
 import com.example.lab9.Beans.Curso;
+import com.example.lab9.Beans.Facultad;
 import com.example.lab9.Beans.Usuario;
 import com.example.lab9.Daos.CursoDao;
 import com.example.lab9.Daos.Facultad_Has_DecanoDao;
@@ -49,7 +50,10 @@ public class DecanoServlet extends HttpServlet {
                     case "registroCurso": //Create
 
                         if (usuario != null){
+                            //ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                            Usuario usuario2 = facultadHasDecanoDao.buscarFacultadxIdDecano(usuario.getIdUsuario());
                             int proximoIdCurso = cursoDao.proximoIdCurso();
+                            request.setAttribute("idFacultad",usuario2.getFacultad().getIdFacultad());
                             request.setAttribute("proxIdCurso", Integer.valueOf(proximoIdCurso));
                             request.setAttribute("listaDocentes", usuarioDao.listaDocentesDisponibles());
                             view = request.getRequestDispatcher("Decano/CursoNew.jsp");
