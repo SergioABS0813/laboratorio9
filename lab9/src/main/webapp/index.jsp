@@ -99,7 +99,7 @@
     <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
         <main class="form-signin w-100 m-auto">
-            <form>
+            <form method="POST" action="<%=request.getContextPath()%>/LoginServlet?action=login">
                 <h1 class="h3 mb-3 fw-normal mb-3" style="color: #48ffff; margin-left: 35px;">Ingreso de Sesión</h1>
 
                 <div class="form-floating">

@@ -280,6 +280,30 @@ public class UsuarioDao extends DaoBase{
         }
     }
 
+    public void actualizarDocente(Usuario docente) {
+
+        LocalDateTime fechayHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoSql = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaEdit = fechayHoraActual.format(formatoSql);
+
+        String sql = "UPDATE usuario SET nombre = ?, fecha_edicion = ? WHERE idusuario = ?";
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, docente.getNombre());
+            pstmt.setString(2,fechaEdit);
+            pstmt.setInt(3,docente.getIdUsuario());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
 
 
 

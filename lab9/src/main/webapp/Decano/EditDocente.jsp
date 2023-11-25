@@ -27,11 +27,11 @@
         <div class='container mb-4'>
             <h1 class='mt-5' style="margin-left: 40%;"><strong>Editar Docente</strong></h1>
             <hr>
-            <form method="POST" action="<%=request.getContextPath()%>/DepartmentServlet?action=actualizar" class="col-md-6 col-lg-6" style="margin-left: 30%;">
-                <input type="hidden" name="department_id" value="<%=docente.getIdUsuario()%>"/>
+            <form method="POST" action="<%=request.getContextPath()%>/DecanoServlet?action=actualizarDoc" class="col-md-6 col-lg-6" style="margin-left: 30%;">
+                <input type="hidden" name="idDoc" value="<%=docente.getIdUsuario()%>"/>
                 <div class="mb-3">
                     <label for="department_name">Nombre del Docente</label>
-                    <input type="text" class="form-control form-control-sm mt-2" name="department_name"
+                    <input type="text" class="form-control form-control-sm mt-2" name="nombreDoc"
                            value="<%=docente.getNombre()== null ? "" : docente.getNombre()%>">
                 </div>
 
