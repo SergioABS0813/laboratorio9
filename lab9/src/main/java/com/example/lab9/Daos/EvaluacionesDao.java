@@ -4,6 +4,8 @@ import com.example.lab9.Beans.Curso;
 import com.example.lab9.Beans.Evaluaciones;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EvaluacionesDao extends DaoBase{
 
@@ -40,7 +42,8 @@ public class EvaluacionesDao extends DaoBase{
     }
 
     public int proximoIdEvaluacion() {
-        int proximoid = 0;
+        int proximoid = 1;
+        int idIni = 0;
 
         String sql = "SELECT * FROM lab_9.evaluaciones;";
 
@@ -49,7 +52,14 @@ public class EvaluacionesDao extends DaoBase{
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                proximoid++;
+                if(rs.getInt(1) == idIni + 1){
+                    proximoid++;
+                }
+                else{
+                    break;
+                }
+                idIni++;
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -65,6 +75,34 @@ public class EvaluacionesDao extends DaoBase{
 
             pstmt.setInt(1, evaId);
             pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void registrarEvaluacion(Evaluaciones evaluacion){
+        LocalDateTime fechayHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoSql = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaReg = fechayHoraActual.format(formatoSql);
+
+        String sql = "INSERT INTO evaluaciones (idevaluaciones, nombre_estudiantes, codigo_estudiantes, correo_estudiantes, nota, idcurso, idsemestre, fecha_registro, fecha_edicion ) VALUES (?, ?, ?, ?, ?, ?,?,?,?);"; //Primero agregamos a la tabla independiente
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,evaluacion.getIdEvaluaciones());
+            pstmt.setString(2,evaluacion.getNombreEstudiante());
+            pstmt.setString(3, evaluacion.getCodigoEstudiantes());
+            pstmt.setString(4, evaluacion.getCorreoEstudiante());
+            pstmt.setInt(5, evaluacion.getNota());
+            pstmt.setInt(6, evaluacion.getIdCurso());
+            pstmt.setInt(7,evaluacion.getSemestre().getIdSemestre());
+            pstmt.setString(8,fechaReg);
+            pstmt.setString(9,fechaReg);
+
+            pstmt.executeUpdate();
+
 
         } catch (SQLException ex) {
             ex.printStackTrace();

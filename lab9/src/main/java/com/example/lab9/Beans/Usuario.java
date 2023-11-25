@@ -11,6 +11,15 @@ public class Usuario {
     private String fechaRegistro; //
     private String fechaEdicion; //
     private Curso curso; // Bean como atributo
+    private Facultad facultad;
+
+    public Facultad getFacultad() {
+        return facultad;
+    }
+
+    public void setFacultad(Facultad facultad) {
+        this.facultad = facultad;
+    }
 
     public Curso getCurso() {
         return curso;

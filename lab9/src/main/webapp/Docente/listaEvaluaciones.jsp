@@ -9,6 +9,8 @@
 <%@ page import="com.example.lab9.Beans.Evaluaciones" %>
 <%@ page import="com.example.lab9.Beans.Semestre" %>
 <jsp:useBean type="java.util.ArrayList<com.example.lab9.Beans.Evaluaciones>" scope="request" id="listaEvaluaciones"/>
+<jsp:useBean id="usuarioLogueado" scope="session" type="com.example.lab9.Beans.Usuario" class="com.example.lab9.Beans.Usuario" />}
+<jsp:useBean id="nombreCurso" scope="request" type="java.lang.String" class="java.lang.String"/>
 
 <!DOCTYPE html>
 <html>
@@ -36,15 +38,15 @@
 
             <hr style="border: 2px solid #000000">
 
-            <h1 class='mb-3' style="margin-left: 380px;"><strong>Lista de evaluaciones de @Curso</strong></h1>
+            <h1 class='mb-3' style="margin-left: 380px;"><strong>Lista de evaluaciones de <%=nombreCurso%></strong></h1>
 
             <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DocenteServlet?action=registroEvaluaciones">Registrar Evaluación</a>
 
             <table class="table">
                 <tr>
                     <th >ID Evaluación</th>
-                    <th>Nombre</th>
-                    <th>Código</th>
+                    <th>Nombre Alumno</th>
+                    <th>Código Alumno</th>
                     <th>Correo</th>
                     <th>Nota</th>
                     <th>Semestre</th>

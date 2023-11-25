@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.lab9.Dto.CursoDto" %>
 <jsp:useBean type="java.util.ArrayList<com.example.lab9.Dto.CursoDto>" scope="request" id="listaCursos"/>
+<jsp:useBean id="nombreFacu" scope="request" type="java.lang.String" class="java.lang.String"/>
 
 <!DOCTYPE html>
 <html>
@@ -35,15 +36,15 @@
 
             <hr style="border: 2px solid #000000">
 
-            <h1 class='mb-3' style="margin-left: 380px;"><strong>Lista de Cursos de la Facultad</strong></h1>
+            <h1 class='mb-3' style="margin-left: 200px;"><strong>Lista de Cursos de la Facultad: <%=nombreFacu%></strong></h1>
 
             <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DecanoServlet?action=registroCurso">Registrar Curso</a>
 
             <table class="table">
                 <tr>
                     <th >ID Curso</th>
-                    <th>Código</th>
-                    <th>Nombre</th>
+                    <th>Código Curso</th>
+                    <th>Nombre Curso</th>
                     <th>Fecha Registro</th>
                     <th>Fecha Edición</th>
                     <th>Editar</th>

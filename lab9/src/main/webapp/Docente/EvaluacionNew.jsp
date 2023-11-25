@@ -28,36 +28,28 @@
     <body>
         <div class='container'>
             <div class="row justify-content-center">
-                <form method="POST" action="DepartmentServlet?action=guardar" class="col-md-6 col-lg-6">
+                <form method="POST" action="DocenteServlet?action=evaRegistro" class="col-md-6 col-lg-6">
 
                     <h1 class='mt-5' style="margin-left: 110px;"><strong>Registro de Evaluación</strong></h1>
                     <hr>
                     <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name = "department_id" value="<%=proxIdEva%>">
+                        <input type="hidden" class="form-control form-control-sm" name = "proxIdEva" value="<%=proxIdEva%>">
                     </div>
                     <div class="mb-3">
                         <label for="department_id">Nombre de Alumno</label>
-                        <input type="text" class="form-control form-control-sm" name = "department_id">
+                        <input type="text" class="form-control form-control-sm" name = "nombreAlumno">
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Código de Alumno (8 dígitos)</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                        <input type="text" class="form-control form-control-sm" name="codigoAlumno" >
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Correo de Alumno (@gmail.com)</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                        <input type="text" class="form-control form-control-sm" name="correoAlumno" >
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Nota del Alumno (0-20)</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
-                    </div>
-                    <div class="mb-3">
-                        <label for="department_name">Curso del Docente</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
-                    </div>
-                    <div class="mb-3">
-                        <label for="department_name">Semestre Habilitado por ADMIN</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                        <input type="text" class="form-control form-control-sm" name="notaAlumno" >
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DocenteServlet" class="btn btn-danger">Cancelar</a>
