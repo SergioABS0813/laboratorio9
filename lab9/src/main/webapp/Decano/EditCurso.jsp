@@ -27,11 +27,11 @@
         <div class='container mb-4'>
                 <h1 class='mt-5' style="margin-left: 40%;"><strong>Editar Curso</strong></h1>
                 <hr>
-                <form method="POST" action="<%=request.getContextPath()%>/DepartmentServlet?action=actualizar" class="col-md-6 col-lg-6" style="margin-left: 30%;">
-                    <input type="hidden" name="department_id" value="<%=curso.getIdCurso()%>"/>
+                <form method="POST" action="<%=request.getContextPath()%>/DecanoServlet?action=editCurso" class="col-md-6 col-lg-6" style="margin-left: 30%;">
+                    <input type="hidden" name="idCurso" value="<%=curso.getIdCurso()%>"/>
                     <div class="mb-3">
                         <label for="department_name">Nombre del Curso</label>
-                        <input type="text" class="form-control form-control-sm mt-2" name="department_name"
+                        <input type="text" class="form-control form-control-sm mt-2" name="nombreCurso"
                                value="<%=curso.getNombreCurso()== null ? "" : curso.getNombreCurso()%>">
                     </div>
 

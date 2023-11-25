@@ -110,19 +110,21 @@ public class DecanoServlet extends HttpServlet {
 
         UsuarioDao usuarioDao = new UsuarioDao();
         CursoDao cursoDao = new CursoDao();
+        Curso curso = new Curso();
+
+        String idCurso = request.getParameter("idCurso");
+        String nombreCurso = request.getParameter("nombreCurso");
 
         switch (action){
             case "registroCurso": //Crea en ambas tablas de la db
-                String idCurso = request.getParameter("idCurso");
                 String codigoCurso =request.getParameter("codigoCurso");
-                String nombreCurso =request.getParameter("nombreCurso");
                 String facultadDecanoId =request.getParameter("facultadDecanoId");
                 String nameDocenteCurso =request.getParameter("docenteCurso");
                 Usuario docente = usuarioDao.obtenerUsuarioxNombre(nameDocenteCurso); //revisarrrrr
                 String fechaRegistro =request.getParameter("fechaRegistro");
                 String fechaEdicion =request.getParameter("fechaEdicion");
 
-                Curso curso = new Curso();
+
                 curso.setIdCurso(Integer.parseInt(idCurso));
                 curso.setCodigoCurso(codigoCurso);
                 curso.setNombreCurso(nombreCurso);
@@ -134,6 +136,12 @@ public class DecanoServlet extends HttpServlet {
 
                 response.sendRedirect("DecanoServlet");
 
+                break;
+            case "editCurso":
+                curso.setIdCurso(Integer.parseInt(idCurso));
+                curso.setNombreCurso(nombreCurso);
+                cursoDao.actualizarCurso(curso);
+                response.sendRedirect("DecanoServlet");
                 break;
         }
 

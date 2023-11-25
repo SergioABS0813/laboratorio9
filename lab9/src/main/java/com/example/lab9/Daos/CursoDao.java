@@ -6,6 +6,8 @@ import com.example.lab9.Beans.Usuario;
 import com.example.lab9.Dto.CursoDto;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CursoDao extends DaoBase{
@@ -118,6 +120,9 @@ public class CursoDao extends DaoBase{
 
 
     public void registroCurso(Curso curso){
+        LocalDateTime fechayHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoSql = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaReg = fechayHoraActual.format(formatoSql);
 
         String sql = "INSERT INTO curso (idcurso, codigo, nombre, idfacultad, fecha_registro, fecha_edicion ) VALUES (?, ?, ?, ?, ?, ?);"; //Primero agregamos a la tabla independiente
 
@@ -128,8 +133,8 @@ public class CursoDao extends DaoBase{
             pstmt.setString(2,curso.getCodigoCurso());
             pstmt.setString(3, curso.getNombreCurso());
             pstmt.setInt(4, curso.getIdFacultad());
-            pstmt.setString(5, curso.getFechaRegistro());
-            pstmt.setString(6, curso.getFechaEdicion());
+            pstmt.setString(5, fechaReg);
+            pstmt.setString(6, fechaReg);
 
             pstmt.executeUpdate();
 
@@ -146,6 +151,30 @@ public class CursoDao extends DaoBase{
             ex.printStackTrace();
         }
     }
+
+    public void actualizarCurso(Curso curso) {
+
+        LocalDateTime fechayHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoSql = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaEdit = fechayHoraActual.format(formatoSql);
+
+        String sql = "UPDATE curso SET nombre = ?, fecha_edicion = ? WHERE idcurso = ?";
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, curso.getNombreCurso());
+            pstmt.setString(2,fechaEdit);
+            pstmt.setInt(3,curso.getIdCurso());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 
 
 
