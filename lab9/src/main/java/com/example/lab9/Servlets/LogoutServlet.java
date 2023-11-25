@@ -15,6 +15,8 @@ public class LogoutServlet extends HttpServlet {
 
         switch (action){
             case "logout":
+                HttpSession httpSession = request.getSession();
+                httpSession.invalidate();
                 request.getRequestDispatcher("index.jsp").forward(request, response);
 
                 break;

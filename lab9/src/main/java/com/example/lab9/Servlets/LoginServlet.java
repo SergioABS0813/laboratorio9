@@ -53,10 +53,12 @@ public class LoginServlet extends HttpServlet {
             switch (idRolUser){
                 case 3: //Decano
                     httpSession.setAttribute("usuarioLogueado",usuario);
+                    httpSession.setMaxInactiveInterval(10*60); //10 minutos max de inactividad
                     response.sendRedirect("DecanoServlet");
                     break;
                 case 4: //Docente
                     httpSession.setAttribute("usuarioLogueado",usuario);
+                    httpSession.setMaxInactiveInterval(10*60); //10 minutos max de inactividad
                     response.sendRedirect("DocenteServlet");
                     break;
             }

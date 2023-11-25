@@ -23,29 +23,49 @@ public class DecanoServlet extends HttpServlet {
         // recibimos el parámetro
         String action = request.getParameter("action") == null ? "listaCursos" : request.getParameter("action");
 
+        HttpSession httpSession = request.getSession();
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogueado");
+
         switch (action){
             case "listaCursos": //home Decano
 
+                if (usuario != null){
                 request.setAttribute("listaCursos", cursoDao.listaCursoconEvaluaciones());
                 view = request.getRequestDispatcher("Decano/listaCursosFacultad.jsp");
                 view.forward(request, response);
+                }else { //Sesion terminada
+                    response.sendRedirect("LoginServlet");
+                }
                 break;
             case "registroCurso": //Create
-                int proximoIdCurso = cursoDao.proximoIdCurso();
-                request.setAttribute("proxIdCurso", Integer.valueOf(proximoIdCurso));
-                request.setAttribute("listaDocentes", usuarioDao.listaDocentesDisponibles());
-                view = request.getRequestDispatcher("Decano/CursoNew.jsp");
-                view.forward(request, response);
+
+                if (usuario != null){
+                    int proximoIdCurso = cursoDao.proximoIdCurso();
+                    request.setAttribute("proxIdCurso", Integer.valueOf(proximoIdCurso));
+                    request.setAttribute("listaDocentes", usuarioDao.listaDocentesDisponibles());
+                    view = request.getRequestDispatcher("Decano/CursoNew.jsp");
+                    view.forward(request, response);
+
+                }else { //Sesion terminada
+                    response.sendRedirect("LoginServlet");
+                }
+
                 break;
             case "editCurso":
+
+                if (usuario != null){
+
                 String idCurso = request.getParameter("idCurso");
                 int idCursoInt = Integer.parseInt(idCurso); //Asumismos que lo colocará bien
                 Curso curso = cursoDao.obtenerCursoxId(idCursoInt);
                 request.setAttribute("curso", curso);
                 view = request.getRequestDispatcher("Decano/EditCurso.jsp");
                 view.forward(request, response);
+                }else { //Sesion terminada
+                    response.sendRedirect("LoginServlet");
+                }
                 break;
-            case "delCurso": // Funciona pero no cuando hay un docente designado
+            case "delCurso":
 
                 if (request.getParameter("idCurso") != null) {
                     String cursoId = request.getParameter("idCurso");
@@ -59,26 +79,42 @@ public class DecanoServlet extends HttpServlet {
                     cursoDao.borrarCurso(cursoIdint);
                 }
                 response.sendRedirect("DecanoServlet?action=listaCursos");
+
                 break;
             case "listaDocentes":
+
+                if (usuario != null){
                 ArrayList<Usuario> listaDocentesTotal = usuarioDao.listaDocentesSinCurso();
                 request.setAttribute("listatotaldoc", listaDocentesTotal);
                 view = request.getRequestDispatcher("Decano/ListaDocentes.jsp");
                 view.forward(request, response);
+                }else { //Sesion terminada
+                    response.sendRedirect("LoginServlet");
+                }
+
                 break;
             case "registroDocente":
+
+                if (usuario != null){
                 int proximoId = usuarioDao.proximoIdUsuario() + 1;
                 request.setAttribute("proxId", Integer.valueOf(proximoId));
                 view = request.getRequestDispatcher("Decano/DocenteNew.jsp");
                 view.forward(request, response);
+                }else { //Sesion terminada
+                    response.sendRedirect("LoginServlet");
+                }
                 break;
             case "editDocente":
+                if (usuario != null){
                 String idDoc = request.getParameter("idDocente");
                 int idDocInt = Integer.parseInt(idDoc);
                 Usuario docente = usuarioDao.obtenerUsuarioxId(idDocInt);
                 request.setAttribute("docente", docente);
                 view = request.getRequestDispatcher("Decano/EditDocente.jsp");
                 view.forward(request, response);
+                }else { //Sesion terminada
+                    response.sendRedirect("LoginServlet");
+                }
                 break;
             case "delDoc":
                 if (request.getParameter("idDoc") != null) {
