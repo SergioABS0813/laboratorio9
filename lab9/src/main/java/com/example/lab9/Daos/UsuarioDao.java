@@ -302,6 +302,66 @@ public class UsuarioDao extends DaoBase{
         }
     }
 
+    public boolean validarUsuarioPasswordHashed(String correo, String password){
+
+        String sql = "SELECT * FROM usuario where correo = ? and password = sha2(?,256)";
+
+        boolean exito = false;
+
+        try(Connection connection = getConection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+
+            pstmt.setString(1,correo);
+            pstmt.setString(2,password);
+
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    exito = true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return exito;
+    }
+
+    public Usuario obtenerUsuarioxCorreo(String correo) {
+
+        String sql = "SELECT * FROM lab_9.usuario where correo = ?;";
+
+        Usuario usuario = new Usuario();
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, correo);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    usuario.setIdUsuario(rs.getInt(1));
+                    usuario.setNombre(rs.getString(2));
+                    usuario.setCorreo(rs.getString(3));
+                    usuario.setIdRol(rs.getInt(5));
+                    usuario.setUltimoIngreso(rs.getString(6));
+                    usuario.setCantidadIngresos(rs.getInt(7));
+                    usuario.setFechaEdicion(rs.getString(9));
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return usuario;
+    }
+
+
+
+
+
+
 
 
 

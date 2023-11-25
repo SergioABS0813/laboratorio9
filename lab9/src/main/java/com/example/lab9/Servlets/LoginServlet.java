@@ -1,5 +1,7 @@
 package com.example.lab9.Servlets;
 
+import com.example.lab9.Beans.Usuario;
+import com.example.lab9.Daos.UsuarioDao;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -13,26 +15,18 @@ public class LoginServlet extends HttpServlet {
 
         String action = request.getParameter("action") == null? "login" : request.getParameter("action");
 
-        switch (action) {
-            case "register":
-                request.getRequestDispatcher("pages/system/register.jsp").forward(request, response);
-                break;
-            case "confirm_account":
-                request.getRequestDispatcher("/pages/system/confirm_account.jsp").forward(request, response);
-                break;
-            case "validation_complete":
-                request.getRequestDispatcher("/pages/system/validation_complete.jsp").forward(request, response);
-                break;
-            case "forgot_passwd":
-                request.getRequestDispatcher("pages/system/password_recovery/email.jsp").forward(request, response);
-                break;
-            case "unvalid_session":
-                request.getRequestDispatcher("pages/system/unvalid_session.jsp").forward(request, response);
-                break;
+        switch (action){
             case "login":
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+
                 break;
+
         }
+
+
+
+
+
 
     }
 
@@ -40,6 +34,42 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action") == null? "login" : request.getParameter("action");
+
+        String correo = request.getParameter("correo");
+        String password = request.getParameter("password");
+
+
+        System.out.println("correo: " + correo + " | password: " + password);
+        UsuarioDao usuarioDao = new UsuarioDao();
+
+        if(usuarioDao.validarUsuarioPasswordHashed(correo,password)){
+            System.out.println("usuario y password válidos");
+            Usuario usuario = usuarioDao.obtenerUsuarioxCorreo(correo);
+            HttpSession httpSession = request.getSession(); // inicia sesion
+            //Redireccionamos según el rol
+            int idRolUser = usuario.getIdRol();
+            System.out.println(idRolUser);
+
+            switch (idRolUser){
+                case 3: //Decano
+                    httpSession.setAttribute("usuarioLogueado",usuario);
+                    response.sendRedirect("DecanoServlet");
+                    break;
+                case 4: //Docente
+                    httpSession.setAttribute("usuarioLogueado",usuario);
+                    response.sendRedirect("DocenteServlet");
+                    break;
+            }
+
+        }else{ //Mandamos al login (index)
+            System.out.println("usuario o password incorrectos");
+            request.setAttribute("err","Usuario o password incorrectos");
+            request.getRequestDispatcher("index.jsp").forward(request,response);
+        }
+
+
+
+
 
 
 

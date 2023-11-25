@@ -9,6 +9,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Docente/EditEvaluacion.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Docente/listaEvaluaciones.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/includes/navbar.jsp" value="file://$PROJECT_DIR$/src/main/webapp/includes" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/includes/navbarDocente.jsp" value="file://$PROJECT_DIR$/src/main/webapp/includes" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>

@@ -99,17 +99,22 @@
     <body class="d-flex align-items-center py-4 bg-body-tertiary">
 
         <main class="form-signin w-100 m-auto">
-            <form method="POST" action="<%=request.getContextPath()%>/LoginServlet?action=login">
+            <form method="POST" action="<%=request.getContextPath()%>/LoginServlet">
                 <h1 class="h3 mb-3 fw-normal mb-3" style="color: #48ffff; margin-left: 35px;">Ingreso de Sesión</h1>
 
                 <div class="form-floating">
-                    <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
+                    <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com" name = "correo">
+                    <label for="floatingInput">Username</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control mb-3" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control mb-3" id="floatingPassword" placeholder="Password" name = "password">
                     <label for="floatingPassword">Password</label>
                 </div>
+
+                <% if (request.getAttribute("err") != null) {%>
+                <div class="alert alert-danger" role="alert"><%=request.getAttribute("err")%>
+                </div>
+                <% } %>
 
                 <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
             </form>

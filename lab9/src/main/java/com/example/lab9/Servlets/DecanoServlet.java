@@ -24,7 +24,8 @@ public class DecanoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "listaCursos" : request.getParameter("action");
 
         switch (action){
-            case "listaCursos":
+            case "listaCursos": //home Decano
+
                 request.setAttribute("listaCursos", cursoDao.listaCursoconEvaluaciones());
                 view = request.getRequestDispatcher("Decano/listaCursosFacultad.jsp");
                 view.forward(request, response);
