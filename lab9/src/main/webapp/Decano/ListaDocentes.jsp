@@ -19,7 +19,7 @@
         <style>
             body {
                 background-image: url('<%=request.getContextPath()%>/resources/images/white-cubes.jpg');
-                background-size: 150% 155%;
+                background-size: 350% 400%;
                 background-position: center;
                 background-repeat: no-repeat;
             }

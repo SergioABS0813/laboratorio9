@@ -143,6 +143,22 @@ public class DecanoServlet extends HttpServlet {
                 cursoDao.actualizarCurso(curso);
                 response.sendRedirect("DecanoServlet");
                 break;
+            case "regDoc":
+                String proxId = request.getParameter("proxId");
+                int proxIdint = Integer.parseInt(proxId);
+                String nombreDoc = request.getParameter("nombreDoc");
+                String correoDoc = request.getParameter("correoDoc");
+                String contraDoc = request.getParameter("contraDoc");
+
+                Usuario docente1 = new Usuario();
+                docente1.setIdUsuario(proxIdint);
+                docente1.setNombre(nombreDoc);
+                docente1.setCorreo(correoDoc);
+                docente1.setPassword(contraDoc);
+                usuarioDao.registrarDocente(docente1);
+                response.sendRedirect("DecanoServlet?action=listaDocentes");
+
+                break;
         }
 
 

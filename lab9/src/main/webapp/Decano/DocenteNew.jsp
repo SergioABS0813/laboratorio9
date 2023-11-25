@@ -26,36 +26,25 @@
     <body>
         <div class='container'>
             <div class="row justify-content-center">
-                <form method="POST" action="DepartmentServlet?action=guardar" class="col-md-6 col-lg-6">
+                <form method="POST" action="DecanoServlet?action=regDoc" class="col-md-6 col-lg-6">
 
                     <h1 class='mt-5' style="margin-left: 110px;"><strong>Registro de Docente</strong></h1>
                     <hr>
 
                     <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name = "department_id" value="<%=proxId%>">
+                        <input type="text" class="form-control form-control-sm" name = "proxId" value="<%=proxId%>">
                     </div>
                     <div class="mb-3">
                         <label for="department_id">Nombre</label>
-                        <input type="text" class="form-control form-control-sm" name = "department_id">
+                        <input type="text" class="form-control form-control-sm" name = "nombreDoc">
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Correo</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
+                        <input type="text" class="form-control form-control-sm" name="correoDoc" >
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Contraseña</label>
-                        <input type="text" class="form-control form-control-sm" name="department_name" >
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name="department_name" value="0">
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name="department_name" value="<%=LocalDate.now()%>">
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name="department_name" value="<%=LocalTime.now()%>">
+                        <input type="text" class="form-control form-control-sm" name="contraDoc" >
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DecanoServlet?action=listaDocentes" class="btn btn-danger">Cancelar</a>

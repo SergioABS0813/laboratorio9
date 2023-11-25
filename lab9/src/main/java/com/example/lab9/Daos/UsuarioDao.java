@@ -1,10 +1,12 @@
 package com.example.lab9.Daos;
-
 import com.example.lab9.Beans.Curso;
 import com.example.lab9.Beans.Evaluaciones;
 import com.example.lab9.Beans.Usuario;
+import com.mysql.cj.protocol.a.authentication.Sha256PasswordPlugin;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class UsuarioDao extends DaoBase{
@@ -245,6 +247,40 @@ public class UsuarioDao extends DaoBase{
 
         return usuario;
     }
+
+    public void registrarDocente(Usuario docente) {
+
+        LocalDateTime fechayHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoSql = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaRegistro = fechayHoraActual.format(formatoSql);
+
+        int cantIngresos = 0;
+        int idrol = 4;
+
+        String sql = "INSERT INTO usuario (idusuario, nombre, correo, password, idrol, ultimo_ingreso, cantidad_ingresos, fecha_registro, fecha_edicion) "
+                + "VALUES (?, ?, ?, sha2(?,256), ?, ?, ?, ?, ?)";
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1,docente.getIdUsuario());
+            pstmt.setString(2,docente.getNombre());
+            pstmt.setString(3, docente.getCorreo());
+            pstmt.setString(4, docente.getPassword());
+            pstmt.setInt(5,idrol);
+            pstmt.setString(6,fechaRegistro);
+            pstmt.setInt(7,cantIngresos);
+            pstmt.setString(8,fechaRegistro);
+            pstmt.setString(9,fechaRegistro);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 
 
 
