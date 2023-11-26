@@ -38,8 +38,10 @@ public class DocenteServlet extends HttpServlet {
                 switch (action){
                     case "lista"://home de ingreso
                         usuarioDao.actualizarFechaUltimaSesion(usuario.getIdUsuario(), usuario.getCantidadIngresos());
-                        request.setAttribute("listaEvaluaciones", semestreDao.listaEvaluacionConSemestre());
                         Curso curso = cursoHasDocenteDao.buscarCursoxIdDoc(usuario.getIdUsuario()); //solo idCurso
+
+                        request.setAttribute("listaEvaluaciones", semestreDao.listaEvaluacionConSemestreFinal(curso.getIdCurso())); //CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+
                         Curso curso1 = cursoDao.obtenerCursoxId(curso.getIdCurso());
                         request.setAttribute("nombreCurso", curso1.getNombreCurso());
                         view = request.getRequestDispatcher("Docente/listaEvaluaciones.jsp");
@@ -120,7 +122,12 @@ public class DocenteServlet extends HttpServlet {
                         response.sendRedirect("DocenteServlet");
 
                         break;
-                    case "":
+                    case "actualizarEva":
+                        String idEva = request.getParameter("idEva");
+                        String notaEva = request.getParameter("notaEva");
+
+                        evaluacionesDao.actualizarEva(Integer.parseInt(idEva), Integer.parseInt(notaEva));
+                        response.sendRedirect("DocenteServlet");
                         break;
 
                 }

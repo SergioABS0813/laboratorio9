@@ -109,5 +109,27 @@ public class EvaluacionesDao extends DaoBase{
         }
     }
 
+    public void actualizarEva(int idEva, int notaEva) {
+
+        LocalDateTime fechayHoraActual = LocalDateTime.now();
+        DateTimeFormatter formatoSql = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String fechaEdit = fechayHoraActual.format(formatoSql);
+
+        String sql = "UPDATE evaluaciones SET nota = ?, fecha_edicion = ? WHERE idevaluaciones = ?";
+
+        try (Connection conn = getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, notaEva);
+            pstmt.setString(2,fechaEdit);
+            pstmt.setInt(3,idEva);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
 }

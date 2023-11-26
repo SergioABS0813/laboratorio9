@@ -176,7 +176,7 @@ public class UsuarioDao extends DaoBase{
     public ArrayList<Usuario> listaDocentesSinCurso() { // borrados
         ArrayList<Usuario> listaDocentes = new ArrayList<>();
 
-        String sql = "SELECT * FROM lab_9.usuario u left join curso_has_docente c on u.idusuario = c.iddocente where u.idrol = 4;";
+        String sql = "SELECT * FROM lab_9.usuario u left join curso_has_docente chd on (u.idusuario = chd.iddocente) left join curso c on (chd.idcurso = c.idcurso) where (idrol = 4 and c.idcurso is null);";
 
         try (Connection conn = this.getConection();
              Statement stmt = conn.createStatement();
@@ -380,6 +380,47 @@ public class UsuarioDao extends DaoBase{
             ex.printStackTrace();
         }
     }
+
+    public ArrayList<Usuario> listaDocentesSinCurso1(int idFac) { // borradosssssssss
+        ArrayList<Usuario> listaDocentes = new ArrayList<>();
+
+        String sql = "SELECT * FROM lab_9.usuario u left join curso_has_docente chd on u.idusuario = chd.iddocente  left join curso c on chd.idcurso = c.idcurso where (u.idrol = 4 and idfacultad = ?);";
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1,idFac);
+
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    Usuario docentedisponible = new Usuario();
+                    docentedisponible.setIdUsuario(rs.getInt(1));
+                    docentedisponible.setNombre(rs.getString(2));
+                    docentedisponible.setCorreo(rs.getString(3));
+                    docentedisponible.setUltimoIngreso(rs.getString(6));
+                    docentedisponible.setCantidadIngresos(rs.getInt(7));
+                    docentedisponible.setFechaRegistro(rs.getString(8));
+                    docentedisponible.setFechaEdicion(rs.getString(9));
+                    Curso curso = new Curso();
+                    curso.setIdCurso(rs.getInt(10)); // Si es null, luego se convertirá en cero, nos sirve para verificar si está o no asignado a un curso
+
+                    docentedisponible.setCurso(curso);
+
+                    listaDocentes.add(docentedisponible);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaDocentes;
+    }
+
+
+
+
+
 
 
 

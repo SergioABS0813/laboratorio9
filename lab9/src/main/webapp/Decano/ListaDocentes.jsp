@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.example.lab9.Beans.Usuario" %>
 <jsp:useBean type="java.util.ArrayList<com.example.lab9.Beans.Usuario>" scope="request" id="listatotaldoc"/>
+<jsp:useBean type="java.util.ArrayList<com.example.lab9.Beans.Usuario>" scope="request" id="listaDocSinCurso"/>
 
 <!DOCTYPE html>
 <html>
@@ -90,6 +91,50 @@
                 <%
                     }
                 %>
+
+                <%
+                    for (Usuario docente : listaDocSinCurso) {
+                %>
+                <tr>
+                    <td><%=docente.getIdUsuario()%>
+                    </td>
+                    <td><%=docente.getNombre()%>
+                    </td>
+                    <td><%=docente.getCorreo()%>
+                    </td>
+                    <td><%=docente.getUltimoIngreso()%>
+                    </td>
+                    <td><%=docente.getCantidadIngresos()%>
+                    </td>
+                    <td><%=docente.getFechaRegistro()%>
+                    </td>
+                    <td><%=docente.getFechaEdicion()%>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary"
+                           href="<%=request.getContextPath()%>/DecanoServlet?action=editDocente&idDocente=<%=docente.getIdUsuario()%>">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                    <% if (docente.getCurso().getIdCurso() == 0 ){ %>
+                    <td>
+                        <a onclick="return confirm('¿Está seguro de borrar?')" class="btn btn-danger"
+                           href="<%=request.getContextPath()%>/DecanoServlet?action=delDoc&idDoc=<%=docente.getIdUsuario()%>">
+                            <i class="bi bi-trash3"></i>
+                        </a>
+                    </td>
+                    <%}else{ %>
+
+                    <%}%>
+
+                </tr>
+                <%
+                    }
+                %>
+
+
+
+
             </table>
         </div>
 

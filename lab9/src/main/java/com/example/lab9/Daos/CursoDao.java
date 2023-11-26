@@ -174,6 +174,38 @@ public class CursoDao extends DaoBase{
         }
     }
 
+    public ArrayList<CursoDto> listaCursoconEvaluacionesFinal(int idFac) { // borrados
+        ArrayList<CursoDto> listaCursoyEvaluaciones = new ArrayList<>();
+
+        String sql = "SELECT c.idcurso, c.codigo, c.nombre, c.idfacultad, c.fecha_registro, c.fecha_edicion, count(e.idevaluaciones) as cantidadEvaluaciones FROM lab_9.curso c left join evaluaciones e on c.idcurso = e.idcurso where idfacultad = ? group by c.idcurso;";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setInt(1, idFac);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    CursoDto curso = new CursoDto();
+                    curso.setIdCurso(rs.getInt(1));
+                    curso.setCodigoCurso(rs.getString(2));
+                    curso.setNombreCurso(rs.getString(3));
+                    curso.setIdFacultad(rs.getInt(4));
+                    curso.setFechaRegistro(rs.getString(5));
+                    curso.setFechaEdicion(rs.getString(6));
+                    curso.setCantidadEvaluaciones(rs.getInt(7)); //nos sirve para verificar si está o no asignado a un curso (Si es cero entonces no)
+
+                    listaCursoyEvaluaciones.add(curso);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaCursoyEvaluaciones;
+    }
+
 
 
 

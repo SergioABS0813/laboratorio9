@@ -6,6 +6,7 @@ import com.example.lab9.Beans.Usuario;
 import com.example.lab9.Daos.CursoDao;
 import com.example.lab9.Daos.Facultad_Has_DecanoDao;
 import com.example.lab9.Daos.UsuarioDao;
+import com.example.lab9.Dto.CursoDto;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -40,7 +41,8 @@ public class DecanoServlet extends HttpServlet {
                             usuarioDao.actualizarFechaUltimaSesion(usuario.getIdUsuario(), usuario.getCantidadIngresos());
                             Usuario usuario1 = facultadHasDecanoDao.buscarFacultadxIdDecano(usuario.getIdUsuario());
                             request.setAttribute("nombreFacu", usuario1.getFacultad().getNombreFacultad());
-                            request.setAttribute("listaCursos", cursoDao.listaCursoconEvaluaciones());
+                            ArrayList<CursoDto> listaCursos = cursoDao.listaCursoconEvaluacionesFinal(usuario1.getFacultad().getIdFacultad());
+                            request.setAttribute("listaCursos", listaCursos);
                             view = request.getRequestDispatcher("Decano/listaCursosFacultad.jsp");
                             view.forward(request, response);
                         }else { //Sesion terminada
@@ -50,7 +52,6 @@ public class DecanoServlet extends HttpServlet {
                     case "registroCurso": //Create
 
                         if (usuario != null){
-                            //ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
                             Usuario usuario2 = facultadHasDecanoDao.buscarFacultadxIdDecano(usuario.getIdUsuario());
                             int proximoIdCurso = cursoDao.proximoIdCurso();
                             request.setAttribute("idFacultad",usuario2.getFacultad().getIdFacultad());
@@ -97,8 +98,11 @@ public class DecanoServlet extends HttpServlet {
                     case "listaDocentes":
 
                         if (usuario != null){
-                            ArrayList<Usuario> listaDocentesTotal = usuarioDao.listaDocentesSinCurso();
+                            Usuario usuario2 = facultadHasDecanoDao.buscarFacultadxIdDecano(usuario.getIdUsuario());
+                            ArrayList<Usuario> listaDocentesTotal = usuarioDao.listaDocentesSinCurso1(usuario2.getFacultad().getIdFacultad());// ffffff
                             request.setAttribute("listatotaldoc", listaDocentesTotal);
+                            ArrayList<Usuario> listaDocentesSinCurso = usuarioDao.listaDocentesSinCurso();
+                            request.setAttribute("listaDocSinCurso", listaDocentesSinCurso);
                             view = request.getRequestDispatcher("Decano/ListaDocentes.jsp");
                             view.forward(request, response);
                         }else { //Sesion terminada

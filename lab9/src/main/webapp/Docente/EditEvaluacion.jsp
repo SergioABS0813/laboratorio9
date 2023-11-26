@@ -27,31 +27,12 @@
     <div class='container mb-4'>
       <h1 class='mt-5' style="margin-left: 40%;"><strong>Editar Evaluación</strong></h1>
       <hr>
-      <form method="POST" action="<%=request.getContextPath()%>/DepartmentServlet?action=actualizar" class="col-md-6 col-lg-6" style="margin-left: 30%;">
-        <input type="hidden" name="department_id" value="<%=eva.getIdEvaluaciones()%>"/>
-        <div class="mb-3">
-          <label for="department_id">Nombre de Alumno</label>
-          <input type="text" class="form-control form-control-sm" name = "department_id" value="<%=eva.getNombreEstudiante()%>">
-        </div>
-        <div class="mb-3">
-          <label for="department_name">Código de Alumno (8 dígitos)</label>
-          <input type="text" class="form-control form-control-sm" name="department_name" value="<%=eva.getCodigoEstudiantes()%>">
-        </div>
-        <div class="mb-3">
-          <label for="department_name">Correo de Alumno (@gmail.com)</label>
-          <input type="text" class="form-control form-control-sm" name="department_name" value="<%=eva.getCorreoEstudiante()%>" >
-        </div>
+      <form method="POST" action="<%=request.getContextPath()%>/DocenteServlet?action=actualizarEva" class="col-md-6 col-lg-6" style="margin-left: 30%;">
+        <input type="hidden" name="idEva" value="<%=eva.getIdEvaluaciones()%>"/>
+
         <div class="mb-3">
           <label for="department_name">Nota del Alumno (0-20)</label>
-          <input type="text" class="form-control form-control-sm" name="department_name" value="<%=eva.getNota()%>">
-        </div>
-        <div class="mb-3">
-          <label for="department_name">Curso del Docente</label>
-          <input type="text" class="form-control form-control-sm" name="department_name" >
-        </div>
-        <div class="mb-3">
-          <label for="department_name">Semestre Habilitado por ADMIN</label>
-          <input type="text" class="form-control form-control-sm" name="department_name" >
+          <input type="text" class="form-control form-control-sm" name="notaEva" value="<%=eva.getNota()%>">
         </div>
 
         <a href="<%= request.getContextPath()%>/DocenteServlet" class="btn btn-danger mt-2">Cancelar</a>
