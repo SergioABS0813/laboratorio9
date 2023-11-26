@@ -1,0 +1,28 @@
+Decano 1:
+
+usuario (correo) : decano1@gmail.com
+
+contraseña: decano
+
+Docente 1:
+
+usuario (correo) : docente1@gmail.com
+
+contraseña: docente
+
+-------------------------------------------------------------
+Decano 2:
+
+usuario (correo) : decano2@gmail.com
+
+contraseña: decano
+
+Docente 2:
+
+usuario (correo) : docente2@gmail.com
+
+contraseña: docente
+
+--------------------------------------------------------------
+
+ (Y así sucesivamente para todos los decanos y docentes en base de datos)
