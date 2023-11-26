@@ -41,6 +41,7 @@
             <h1 class='mb-3' style="margin-left: 380px;"><strong>Lista de evaluaciones de <%=nombreCurso%></strong></h1>
 
             <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DocenteServlet?action=registroEvaluaciones">Registrar Evaluación</a>
+            <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DocenteServlet?action=registroEvaluaciones">Semestre</a>
 
             <table class="table">
                 <tr>
