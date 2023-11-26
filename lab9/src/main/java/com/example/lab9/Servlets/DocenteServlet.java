@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 @WebServlet(name = "DocenteServlet", value = "/DocenteServlet")
 public class DocenteServlet extends HttpServlet {
@@ -37,15 +38,20 @@ public class DocenteServlet extends HttpServlet {
 
                 switch (action){
                     case "lista"://home de ingreso
+
                         usuarioDao.actualizarFechaUltimaSesion(usuario.getIdUsuario(), usuario.getCantidadIngresos());
                         Curso curso = cursoHasDocenteDao.buscarCursoxIdDoc(usuario.getIdUsuario()); //solo idCurso
 
-                        request.setAttribute("listaEvaluaciones", semestreDao.listaEvaluacionConSemestreFinal(curso.getIdCurso())); //CAMBIARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+                        ArrayList<Evaluaciones> listaEvaluaciones = semestreDao.listaEvaluacionConSemestreFinal(curso.getIdCurso());
 
+                        request.setAttribute("listaEvaluaciones", listaEvaluaciones);
+                        request.setAttribute("listaSemestre", semestreDao.listaSemestre());
                         Curso curso1 = cursoDao.obtenerCursoxId(curso.getIdCurso());
                         request.setAttribute("nombreCurso", curso1.getNombreCurso());
                         view = request.getRequestDispatcher("Docente/listaEvaluaciones.jsp");
                         view.forward(request, response);
+
+
                         break;
                     case "registroEvaluaciones":
                         int proximoIdEvaluacion = evaluacionesDao.proximoIdEvaluacion();
@@ -95,8 +101,6 @@ public class DocenteServlet extends HttpServlet {
                 Curso_Has_DocenteDao cursoHasDocenteDao = new Curso_Has_DocenteDao();
 
 
-
-
                 String action = request.getParameter("action") == null ? "listaCursos" : request.getParameter("action");
 
                 switch (action){
@@ -128,6 +132,16 @@ public class DocenteServlet extends HttpServlet {
 
                         evaluacionesDao.actualizarEva(Integer.parseInt(idEva), Integer.parseInt(notaEva));
                         response.sendRedirect("DocenteServlet");
+                        break;
+                    case "busqueda":
+                        String nombreSemestre = request.getParameter("nombreSemestre");
+                        Curso curso1 = cursoHasDocenteDao.buscarCursoxIdDoc(usuario.getIdUsuario());
+                        ArrayList<Evaluaciones> listaEvaSem = evaluacionesDao.listaEvaluacionesxSem(nombreSemestre, curso1.getIdCurso());
+                        request.setAttribute("nombreCurso",curso1.getNombreCurso());
+                        request.setAttribute("listaEvaluaciones", listaEvaSem);
+
+
+                        request.getRequestDispatcher("Docente/listaEvaluaciones.jsp").forward(request,response);
                         break;
 
                 }

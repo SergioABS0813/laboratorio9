@@ -28,11 +28,11 @@
       <h1 class='mt-5' style="margin-left: 40%;"><strong>Editar Evaluación</strong></h1>
       <hr>
       <form method="POST" action="<%=request.getContextPath()%>/DocenteServlet?action=actualizarEva" class="col-md-6 col-lg-6" style="margin-left: 30%;">
-        <input type="hidden" name="idEva" value="<%=eva.getIdEvaluaciones()%>"/>
+        <input type="hidden" name="idEva" value="<%=eva.getIdEvaluaciones()%>" required>
 
         <div class="mb-3">
           <label for="department_name">Nota del Alumno (0-20)</label>
-          <input type="text" class="form-control form-control-sm" name="notaEva" value="<%=eva.getNota()%>">
+          <input type="text" class="form-control form-control-sm" name="notaEva" value="<%=eva.getNota()%>" required>
         </div>
 
         <a href="<%= request.getContextPath()%>/DocenteServlet" class="btn btn-danger mt-2">Cancelar</a>

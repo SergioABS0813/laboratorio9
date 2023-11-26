@@ -32,7 +32,7 @@
                 <div class="mb-3">
                     <label for="department_name">Nombre del Docente</label>
                     <input type="text" class="form-control form-control-sm mt-2" name="nombreDoc"
-                           value="<%=docente.getNombre()== null ? "" : docente.getNombre()%>">
+                           value="<%=docente.getNombre()== null ? "" : docente.getNombre()%>" required>
                 </div>
 
                 <a href="<%= request.getContextPath()%>/DecanoServlet?action=listaDocentes" class="btn btn-danger mt-2">Cancelar</a>

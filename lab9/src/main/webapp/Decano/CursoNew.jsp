@@ -36,15 +36,15 @@
                     <hr>
 
                     <div class="mb-3">
-                        <input type="text" class="form-control form-control-sm" name = "idCurso" value="<%=proxIdCurso%>">
+                        <input type="hidden" class="form-control form-control-sm" name = "idCurso" value="<%=proxIdCurso%>">
                     </div>
                     <div class="mb-3">
                         <label for="codigoCurso">Código del Curso</label>
-                        <input type="text" class="form-control form-control-sm" name = "codigoCurso">
+                        <input type="text" class="form-control form-control-sm" name = "codigoCurso" required>
                     </div>
                     <div class="mb-3">
                         <label for="nombreCurso">Nombre del Curso</label>
-                        <input type="text" class="form-control form-control-sm" name="nombreCurso" >
+                        <input type="text" class="form-control form-control-sm" name="nombreCurso" required>
                     </div>
 
                     <div class="mb-3">
@@ -52,20 +52,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="docenteCurso">Docente del Curso</label>
-                        <select name="docenteCurso" class="form-select" >
-                            <option value="SIN-PROFESOR">----Designar Docente----</option>
+                        <label for="docenteCurso">Docente del Curso (Docentes disponibles)</label>
+                        <select name="docenteCurso" class="form-select">
                             <% for(Usuario docenteDisponible: listaDocentes){ %>
                             <option value="<%=docenteDisponible.getNombre()%>"> <%=docenteDisponible.getNombre()%> </option>
                             <% } %>
                         </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name="fechaRegistro" >
-                    </div>
-                    <div class="mb-3">
-                        <input type="hidden" class="form-control form-control-sm" name="fechaEdicion" >
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DecanoServlet" class="btn btn-danger">Cancelar</a>

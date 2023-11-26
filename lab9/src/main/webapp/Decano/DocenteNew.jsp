@@ -36,15 +36,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="department_id">Nombre</label>
-                        <input type="text" class="form-control form-control-sm" name = "nombreDoc">
+                        <input type="text" class="form-control form-control-sm" name = "nombreDoc" required>
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Correo</label>
-                        <input type="text" class="form-control form-control-sm" name="correoDoc" >
+                        <input type="text" class="form-control form-control-sm" name="correoDoc" required>
                     </div>
                     <div class="mb-3">
                         <label for="department_name">Contraseña</label>
-                        <input type="text" class="form-control form-control-sm" name="contraDoc" >
+                        <input type="text" class="form-control form-control-sm" name="contraDoc" required>
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DecanoServlet?action=listaDocentes" class="btn btn-danger">Cancelar</a>

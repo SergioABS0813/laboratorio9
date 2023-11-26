@@ -9,6 +9,30 @@ import java.util.ArrayList;
 
 public class SemestreDao extends DaoBase {
 
+    public ArrayList<Semestre> listaSemestre() { // borrados
+        ArrayList<Semestre> listaSemestre = new ArrayList<>();
+
+        String sql = "SELECT * FROM lab_9.semestre";
+
+        try (Connection conn = this.getConection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Semestre semestre = new Semestre();
+                semestre.setIdSemestre(rs.getInt(1));
+                semestre.setNombre(rs.getString(2));
+                semestre.setHabilitado(rs.getInt(3));
+
+                listaSemestre.add(semestre);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaSemestre;
+    }
+
 
 
     public ArrayList<Evaluaciones> listaEvaluacionConSemestre() { // borrados
@@ -118,6 +142,8 @@ public class SemestreDao extends DaoBase {
                     evaluaciones.setCorreoEstudiante(rs.getString(4));
                     evaluaciones.setNota(rs.getInt(5));
                     evaluaciones.setIdCurso(rs.getInt(6));
+                    evaluaciones.setFechaRegistro(rs.getString(8));
+                    evaluaciones.setFechaEdicion(rs.getString(9));
 
                     Semestre semestre = new Semestre();
                     semestre.setIdSemestre(rs.getInt(7));
@@ -135,6 +161,35 @@ public class SemestreDao extends DaoBase {
 
         return listaEvaluacionConSemestre;
     }
+
+    public Semestre buscarSemestrexNombre(String nombre) {
+        Semestre semestre = new Semestre();
+
+        String sql = "SELECT * FROM lab_9.semestre where nombre = ?;";
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
+
+            pstmt.setString(1, nombre);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+
+                if (rs.next()) {
+                    semestre.setIdSemestre(rs.getInt(1));
+                    semestre.setNombre(rs.getString(2));
+                }
+            }
+
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return semestre;
+    }
+
+
 
 
 

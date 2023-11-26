@@ -32,7 +32,7 @@
                     <div class="mb-3">
                         <label for="department_name">Nombre del Curso</label>
                         <input type="text" class="form-control form-control-sm mt-2" name="nombreCurso"
-                               value="<%=curso.getNombreCurso()== null ? "" : curso.getNombreCurso()%>">
+                               value="<%=curso.getNombreCurso()== null ? "" : curso.getNombreCurso()%>" required>
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DecanoServlet" class="btn btn-danger mt-2">Cancelar</a>

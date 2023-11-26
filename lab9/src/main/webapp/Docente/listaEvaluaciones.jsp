@@ -16,6 +16,8 @@
 <html>
     <head>
         <jsp:include page="../includes/bootstrap_header.jsp"/>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <title>Listar de Evaluaciones</title>
 
 
@@ -41,7 +43,23 @@
             <h1 class='mb-3' style="margin-left: 380px;"><strong>Lista de evaluaciones de <%=nombreCurso%></strong></h1>
 
             <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DocenteServlet?action=registroEvaluaciones">Registrar Evaluación</a>
-            <a class="btn btn-primary mb-3" href="<%=request.getContextPath()%>/DocenteServlet?action=registroEvaluaciones">Semestre</a>
+
+            <div class="col-md-10">
+
+                <form method="post" action="<%=request.getContextPath()%>/DocenteServlet?action=busqueda">
+
+                    <div class="custom-form-group">
+                        <input type="text" class="form-control" name="nombreSemestre" placeholder="Buscar por nombre de semestre (YYYY-X)" style="width: 60%; margin-bottom: 8" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+
+
+                    <a class="btn btn-primary" href="<%=request.getContextPath()%>/DocenteServlet" role="button">Borrar filtros</a>
+
+                </form>
+            </div>
+
 
             <table class="table">
                 <tr>
@@ -50,7 +68,8 @@
                     <th>Código Alumno</th>
                     <th>Correo</th>
                     <th>Nota</th>
-                    <th>Semestre</th>
+                    <th>Nombre Semestre</th>
+                    <th>Fecha de Edición</th>
                     <th>Editar</th>
                     <th>Borrar</th>
                 </tr>
@@ -69,6 +88,8 @@
                     <td><%=evaluaciones.getNota()%>
                     </td>
                     <td><%=evaluaciones.getSemestre().getNombre()%>
+                    </td>
+                    <td><%=evaluaciones.getFechaEdicion()%>
                     </td>
                     <td>
                         <a class="btn btn-primary"

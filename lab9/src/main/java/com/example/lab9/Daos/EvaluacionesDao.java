@@ -2,10 +2,12 @@ package com.example.lab9.Daos;
 
 import com.example.lab9.Beans.Curso;
 import com.example.lab9.Beans.Evaluaciones;
+import com.example.lab9.Beans.Semestre;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class EvaluacionesDao extends DaoBase{
 
@@ -130,6 +132,46 @@ public class EvaluacionesDao extends DaoBase{
             ex.printStackTrace();
         }
     }
+
+    public ArrayList<Evaluaciones> listaEvaluacionesxSem(String nombreSemestre, int idCurso) {
+
+        String sql = "SELECT * FROM lab_9.evaluaciones e left join semestre s on e.idsemestre = s.idsemestre where (e.idcurso = ? and s.nombre = ?);";
+
+        ArrayList<Evaluaciones> listaevaluaciones = new ArrayList<Evaluaciones>();
+
+        try (Connection conn = this.getConection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idCurso);
+            pstmt.setString(2, nombreSemestre);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    Evaluaciones evaluaciones = new Evaluaciones();
+                    evaluaciones.setIdEvaluaciones(rs.getInt(1));
+                    evaluaciones.setNombreEstudiante(rs.getString(2));
+                    evaluaciones.setCodigoEstudiantes(rs.getString(3));
+                    evaluaciones.setCorreoEstudiante(rs.getString(4));
+                    Semestre semestre = new Semestre();
+                    semestre.setNombre(rs.getString(11));
+                    evaluaciones.setNota(rs.getInt(5));
+                    evaluaciones.setFechaRegistro(rs.getString(8));
+                    evaluaciones.setFechaEdicion(rs.getString(9));
+                    evaluaciones.setSemestre(semestre);
+
+                    listaevaluaciones.add(evaluaciones);
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaevaluaciones;
+    }
+
+
 
 
 }

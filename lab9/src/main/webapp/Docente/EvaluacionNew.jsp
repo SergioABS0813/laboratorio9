@@ -36,20 +36,20 @@
                         <input type="hidden" class="form-control form-control-sm" name = "proxIdEva" value="<%=proxIdEva%>">
                     </div>
                     <div class="mb-3">
-                        <label for="department_id">Nombre de Alumno</label>
-                        <input type="text" class="form-control form-control-sm" name = "nombreAlumno">
+                        <label for="nombreAlumno">Nombre de Alumno</label>
+                        <input type="text" class="form-control form-control-sm" name = "nombreAlumno" required>
                     </div>
                     <div class="mb-3">
-                        <label for="department_name">Código de Alumno (8 dígitos)</label>
-                        <input type="text" class="form-control form-control-sm" name="codigoAlumno" >
+                        <label for="codigoAlumno">Código de Alumno (8 dígitos)</label>
+                        <input type="text" class="form-control form-control-sm" name="codigoAlumno" required>
                     </div>
                     <div class="mb-3">
-                        <label for="department_name">Correo de Alumno (@gmail.com)</label>
-                        <input type="text" class="form-control form-control-sm" name="correoAlumno" >
+                        <label for="correoAlumno">Correo de Alumno (@gmail.com)</label>
+                        <input type="text" class="form-control form-control-sm" name="correoAlumno" required>
                     </div>
                     <div class="mb-3">
-                        <label for="department_name">Nota del Alumno (0-20)</label>
-                        <input type="text" class="form-control form-control-sm" name="notaAlumno" >
+                        <label for="notaAlumno">Nota del Alumno (0-20)</label>
+                        <input type="text" class="form-control form-control-sm" name="notaAlumno" required>
                     </div>
 
                     <a href="<%= request.getContextPath()%>/DocenteServlet" class="btn btn-danger">Cancelar</a>
